@@ -13,11 +13,17 @@ public class Pokemon {
     @Column(nullable = false)
     private int vida;
     private boolean isShiny;
-    @OneToOne(optional = false)
+
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_tipo")
     private Tipo tipo;
 
-    @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "pokemon_ataque",
+            joinColumns = @JoinColumn(name = "id_pokemon"),
+            inverseJoinColumns = @JoinColumn(name = "id_ataque")
+    )
     private List<Ataque> ataques;
 
     @Id

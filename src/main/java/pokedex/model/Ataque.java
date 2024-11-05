@@ -2,6 +2,8 @@ package pokedex.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "ataques")
 public class Ataque {
@@ -14,9 +16,8 @@ public class Ataque {
     @JoinColumn(name = "id_tipo")
     private Tipo tipo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pokemon")
-    private Pokemon pokemon;
+    @ManyToMany(mappedBy = "ataques", fetch = FetchType.LAZY)
+    private List<Pokemon> pokemon;
 
     @Id
     private String nombre;
@@ -62,11 +63,11 @@ public class Ataque {
         this.nombre = nombre;
     }
 
-    public Pokemon getPokemon() {
+    public List<Pokemon> getPokemon() {
         return pokemon;
     }
 
-    public void setPokemon(Pokemon pokemon) {
+    public void setPokemon(List<Pokemon> pokemon) {
         this.pokemon = pokemon;
     }
 }

@@ -21,12 +21,12 @@ public class PokemonController {
         return service.getById(id);
     }
 
-    @GetMapping("/") // URI -> GET localhost:8080/pokemon/
+    @GetMapping // URI -> GET localhost:8080/pokemon
     public List<PokemonDTO> getAll() {
         return service.getAll();
     }
 
-    @PostMapping("/") // URI -> POST localhost:8080/pokemon/
+    @PostMapping // URI -> POST localhost:8080/pokemon
     public PokemonDTO insert(
             @RequestBody PokemonDTO pokemonDTO
     ) {
@@ -38,7 +38,15 @@ public class PokemonController {
             @RequestBody PokemonDTO pokemonDTO,
             @PathVariable String id
     ) {
-        return null;
+        return service.update(pokemonDTO, id);
     }
 
+    @DeleteMapping("/{id}") // URI -> DELETE localhost:8080/pokemon/{id}
+    public PokemonDTO delete(
+            @PathVariable String id
+    ) {
+        if(id == null || id.isEmpty()) return null;
+
+        return service.delete(id);
+    }
 }

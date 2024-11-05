@@ -46,4 +46,14 @@ public class PokemonDTO {
     public void setAtaque(AtaqueDTO ataque) {
         this.ataque = ataque;
     }
+
+    @Override
+    public String toString() {
+        return "PokemonDTO{" +
+                "nombre='" + nombre + '\'' +
+                ", vida=" + vida +
+                ", tipo=" + tipo +
+                ", ataque=" + ataque +
+                '}';
+    }
 }
